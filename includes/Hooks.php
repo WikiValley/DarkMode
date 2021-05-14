@@ -20,10 +20,17 @@ class Hooks {
 		if ( !self::shouldHaveDarkMode( $skin ) ) {
 			return;
 		}
+		$request = $skin->getRequest();
+
+		if( $request->getCookie( 'darkmode' ) !== null ) {
+			$msg = 'darkmode-default-link';
+		} else {
+			$msg = 'darkmode-link';
+		}
 
 		$insertUrls = [
 			'darkmode-link' => [
-				'text' => $skin->msg( 'darkmode-link' )->text(),
+				'text' => $skin->msg( $msg )->text(),
 				'href' => '#',
 				'active' => false,
 			]
@@ -54,5 +61,18 @@ class Hooks {
 	 */
 	private static function shouldHaveDarkMode( Skin $skin ) {
 		return $skin->getUser()->isLoggedIn() && $skin->getSkinName() !== 'minerva';
+	}
+
+	/**
+	* @param OutputPage $out
+	* @param Skin $skin
+	* @param bodyAttrs &$bodyAttrs
+	*/
+	public static function onOutputPageBodyAttributes( OutputPage $out, Skin $skin, &$bodyAttrs ){
+		$request = $skin->getRequest();
+
+		if( $request->getCookie( 'darkmode' ) !== null ) {
+			$bodyAttrs['class'] .= ' client-dark-mode'; // Note the leading space character.
+		}
 	}
 }

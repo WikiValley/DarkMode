@@ -16,7 +16,8 @@
 	},
 	"Hooks": {
 		"PersonalUrls": "MediaWiki\\Extension\\DarkMode\\Hooks::onPersonalUrls",
-		"BeforePageDisplay": "MediaWiki\\Extension\\DarkMode\\Hooks::onBeforePageDisplay"
+		"BeforePageDisplay": "MediaWiki\\Extension\\DarkMode\\Hooks::onBeforePageDisplay",
+		"OutputPageBodyAttributes": "MediaWiki\\Extension\\DarkMode\\Hooks::onOutputPageBodyAttributes"
 	},
 	"MessagesDirs": {
 		"DarkMode": [
